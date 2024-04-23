@@ -10,7 +10,7 @@ def index(request):
 
 def about(request):
     context = {
-        'title':'Home - о нас',
+        'title':'Главная - о нас',
         'content':'О нас',
         'text_on_page':'Мы супер кАмпания и супер кОмпания!',
     }

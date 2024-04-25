@@ -87,10 +87,9 @@
                             height="16">
                     </button>
                     <ul class="dropdown-menu bg-dark" data-bs-theme="dark">
-                        <li><a class="dropdown-item text-white" href="{% url "catalog:index" %}">Зерноуборочные</a></li>
-                        <li><a class="dropdown-item text-white" href="{% url "catalog:index" %}">Кормоуборочные</a></li>
-                        <li><a class="dropdown-item text-white" href="{% url "catalog:index" %}">Свеклоуборочные</a></li>
-                        <li><a class="dropdown-item text-white" href="{% url "catalog:index" %}">Все комбайны</a></li>
+                        {% for category  in categories  %}
+                        <li><a class="dropdown-item text-white" href="{% url "catalog:index" %}">{{category.name}}</a></li>
+                        {% endfor %}
                     </ul>
                 </div>
                 <!-- Значек корзины, вызывает модальное окно -->

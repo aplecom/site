@@ -8,6 +8,9 @@ class Categories(models.Model):
         db_table = 'category'
         verbose_name = 'Категорию'
         verbose_name_plural = 'Категории'
+    
+    def __str__(self) -> str:
+        return self.name
 
 class Products(models.Model):
     name = models.CharField(max_length=150,unique=True,verbose_name='Название')
@@ -21,3 +24,6 @@ class Products(models.Model):
         db_table = 'product'
         verbose_name = 'Продукт'
         verbose_name_plural = 'Продукты'
+    
+    def __str__(self) -> str:
+        return self.name

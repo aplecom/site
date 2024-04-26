@@ -1,10 +1,17 @@
 from django.shortcuts import render
 from goods.models import Products
+from goods.utils import q_search
 
-def catalog(request,category_slug):
+
+
+def catalog(request,category_slug = None):
+
+    query = request.GET.get("q",None)
 
     if category_slug == 'all':
         goods = Products.objects.all()
+    elif query:
+        goods= q_search(query)
     else:
         goods = Products.objects.filter(category__slug= category_slug)
 

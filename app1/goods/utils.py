@@ -11,5 +11,6 @@ def q_search(query):
 
     for token in keywords:
         q_objects |= Q(description__icontains=token)
+        q_objects |= Q(name__icontains=token)
     
     return  Products.objects.filter(q_objects)

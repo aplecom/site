@@ -9,7 +9,7 @@ class Categories(models.Model):
         verbose_name = 'Категорию'
         verbose_name_plural = 'Категории'
     
-    def __str__(self) -> str:
+    def __str__(self):
         return self.name
 
 class Products(models.Model):
@@ -25,7 +25,7 @@ class Products(models.Model):
         verbose_name = 'Продукт'
         verbose_name_plural = 'Продукты'
     
-    def __str__(self) -> str:
+    def __str__(self):
         return self.name
     
     def display_id(self):

@@ -19,7 +19,6 @@ class Products(models.Model):
     image = models.ImageField(upload_to='goods_images',blank=True,null = True,verbose_name='Изображение')
     price = models.DecimalField(default=0.00,max_digits=7,decimal_places=2,verbose_name='Цена')
     category = models.ForeignKey(to = Categories,on_delete=models.CASCADE,verbose_name='Категория') 
-
     class Meta:
         db_table = 'product'
         verbose_name = 'Продукт'

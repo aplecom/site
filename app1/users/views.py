@@ -3,7 +3,10 @@ from django.contrib import auth
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.urls import reverse
+from django.db.models import Prefetch
 
+
+from orders.models import Order, OrderItem
 from users.forms import ProfileForm, UserLoginForm, UserRegistrationForm
 
 def login(request):
@@ -37,7 +40,7 @@ def registration(request):
         form = UserRegistrationForm()
     
     context = {
-        'title': 'Home - Регистрация',
+        'title': 'Регистрация',
         'form': form
     }
     return render(request, 'users/registration.html', context)
@@ -52,10 +55,17 @@ def profile(request):
     else:
         form = ProfileForm(instance=request.user)
 
+    orders = Order.objects.filter(user=request.user).prefetch_related(
+                Prefetch(
+                    "orderitem_set",
+                    queryset=OrderItem.objects.select_related("product"),
+                )
+            ).order_by("-id")
 
     context = {
-        'title': 'Home - Кабинет',
+        'title': 'Кабинет',
         'form': form,
+        'orders':orders
     }
     return render(request, 'users/profile.html', context)
 

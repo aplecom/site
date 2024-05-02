@@ -20,8 +20,6 @@ def cart_add(request, product_slug):
 
     return redirect(request.META['HTTP_REFERER'])
 
-def cart_change(request,product_slug):
-    ...
 
 def cart_remove(request, cart_id):
 
@@ -29,4 +27,5 @@ def cart_remove(request, cart_id):
     cart.delete()
 
     return redirect(request.META['HTTP_REFERER'])
+
 

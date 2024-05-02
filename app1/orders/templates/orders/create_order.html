@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load static %}
+{% load carts_tags %}
+
+{% block content %}
+<div class=" bg-white p-4 mb-4 mx-2 rounded custom-shadow">
+    <div class="container">
+        <h3 class="text-center mb-4">Выбранные товары</h3>
+        <div class="container" id="cart-items-container">
+            <!-- Разметка корзины -->
+            {%user_carts request as carts%}
+            {% include "carts/includes/included_cart.html" %}
+            <!-- Закончилась разметка корзины -->
+        </div>
+    </div>
+    <!-- Детали заказа -->
+    <div class="container">
+        <h3 class="text-center">Детали заказа</h3>
+        <div class="card mb-3">
+            <div class="card-body">
+                <form action="{% url "orders:create_order" %}" method="post">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="id_area" class="form-label">Площадь земли*:</label>
+                            <input type="number" class="form-control" id="id_area" name="land_area" 
+                            value="{{ form.land_area.value }}"
+                            required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="id_date" class="form-label">Дата обработки земли*:</label>
+                            <input type="date" class="form-control" id="id_date" name="land_processing_date" 
+                            value="{{ form.land_processing_date.value }}"
+                            required>
+                        </div>
+                        
+                        <div class="col-md-6 mb-3">
+                            <label for="id_phone_number" class="form-label">Номер телефона*:</label>
+                            <input type="text" class="form-control" id="id_phone_number" name="phone_number"
+                                placeholder="В формате: 81231231234"
+                                value="{{form.phone_number.value }}"                                
+                                required>
+                                {% if form.phone_number.errors %}
+                                <div class="alert alert-danger alert-dismissible fade show">{{form.phone_number.errors}}</div>
+                                {% endif %}
+                            </div>
+                        
+                        <div class="mb-3" id="deliveryAddressField">
+                            <label for="id_delivery_address" class="form-label">Адрес*:</label>
+                            <textarea class="form-control" id="id_delivery_address"
+                                name="delivery_address" rows="2"
+                                value= "{{ form.delivery_address.value }}">
+                            </textarea>
+                            {% if form.delivery_address.errors %}
+                            <div class="alert alert-danger alert-dismissible fade show">{{form.delivery_address.errors}}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-dark">Оформить заказ</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

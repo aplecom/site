@@ -89,7 +89,7 @@ DATABASES = {
         'NAME': 'combine',
         'USER': 'admin',
         'PASSWORD': 'admin',
-        'HOST': 'postgres',
+        'HOST': 'localhost',
         'PORT': '5432',
     }
 }
